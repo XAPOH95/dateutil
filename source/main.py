@@ -1,5 +1,5 @@
 from .abi_month.behavior import Constructor
-from .abi_year.behavior import Behavior as yearmonth
+from .abi_year.behavior import Behavior as Year
 from .contract import CShortRepresentation, CLongRepresentation, CIndexRepresentation, CComparision, COffset
 
 class Month(CShortRepresentation, CLongRepresentation, CIndexRepresentation, CComparision, COffset):
@@ -65,19 +65,22 @@ class Month(CShortRepresentation, CLongRepresentation, CIndexRepresentation, CCo
         return self.index()
 
 class MonthYear(CShortRepresentation):
+    """Role of class is to show trimmed month and year with separator between.
+    
+    Month trimmed to 3 chars and year is trimmed to 2 chars."""
     def __init__(self, month, year, separator) -> None:
-        month = Constructor(month).construct_month()
-        self.__yearmonth = yearmonth(month, year, separator)
+        self.__month = Constructor(month).construct_month()
+        self.__year = Year(year, separator)
 
     def Ru(self) -> str:
-        return self.__yearmonth.ShortRu()
+        return self.__month.short_ru_name() + self.__year.Short()
 
     def Eng(self) -> str:
-        return self.__yearmonth.ShortEng()
+        return self.__month.short_eng_name() + self.__year.Short()
 
     def __str__(self) -> str:
-        return str(self.__yearmonth)
+        return self.Eng()
 
     def __repr__(self) -> str:
-        return str(self.__yearmonth)
+        return self.Eng()
 

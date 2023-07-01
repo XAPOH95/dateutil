@@ -8,14 +8,14 @@ class Behavior(Abstraction, IName):
             return self.Sep() + year[2:]
         return self.Sep() + year
 
-    def ShortRu(self) -> str:
-        return self.Month().short_ru_name() + self._year()
+    def Short(self) -> str:
+        return self._year()
 
-    def ShortEng(self) -> str:
-        return self.Month().short_eng_name() + self._year()
+    def Long(self) -> str:
+        return self.Year()
 
     def __str__(self) -> str:
-        return self.Month().short_eng_name() + " " + str(self.Year())
+        return str(self.Year())
 
     def __repr__(self) -> str:
-        return self.Month().short_eng_name() + " " + str(self.Year())
+        return str(self.Year())
